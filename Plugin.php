@@ -41,7 +41,7 @@ class AjaxComment_Plugin implements Typecho_Plugin_Interface
      */
     public static function activate()
     {
-        Typecho_Plugin::factory('Widget_Archive')->afterRender = array(
+        Typecho_Plugin::factory('Widget_Archive')->singleHandle = array(
             'AjaxComment_Plugin',
             'Widget_Archive_afterRender'
         );
@@ -191,7 +191,7 @@ class AjaxComment_Plugin implements Typecho_Plugin_Interface
             var success_div = '<div class="AjaxComment_success"><img src="<?php echo $plugin_url; ?>image/success.png" />&nbsp;提交成功.</div>';
             var error_div = '<div id="AjaxComment_error" style="display:none"><img src="<?php echo $plugin_url; ?>image/error.png"/><span id="AjaxComment_msg"></span></div>';
             var id_format = 'comment-{id}';
-            var respond_id = 'respond-post-<?php echo $archive->cid;?>';
+            var respond_id = 'respond-<?php if($archive->is('post')) echo 'post-' . $archive->cid; if($archive->is('page')) echo 'page-' . $archive->cid;?>';
             var comments_order = '<?php echo $options->commentsOrder; ?>';
 
             var comment_list_element = '<?php echo $settings->comment_list_element; ?>';
@@ -234,6 +234,5 @@ public function get_filtered_comment($coid){
     $content=$rs['text'];
     echo $content;
 }
-
-
 }
+?>

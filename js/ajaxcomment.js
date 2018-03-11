@@ -127,10 +127,10 @@ function registAjaxCommentEvent() {
     if (null != r) {
         var forms = r.getElementsByTagName('form');
         if (forms.length > 0) {
-            if (_id('AjaxComment_loading') == undefined) {
+            if (_id('AjaxComment_loading') == null) {
                 appendChildHtml(forms[0].getElementsByTagName('textarea')[0].parentNode, loading_div);
             }
-            if (_id('AjaxComment_error') == undefined) {
+            if (_id('AjaxComment_error') == null) {
                 appendChildHtml(forms[0].getElementsByTagName('textarea')[0].parentNode, error_div);
             }
 
